@@ -1,0 +1,15 @@
+provider "google" {
+  project = "your-project-id"
+  region  = "us-central1"
+}
+
+resource "google_storage_bucket" "default" {
+  name     = "example-bucket-123456"
+  location = "US"
+
+  uniform_bucket_level_access = true
+
+  versioning {
+    enabled = true
+  }
+}

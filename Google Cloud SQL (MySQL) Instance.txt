@@ -1,0 +1,23 @@
+provider "google" {
+  project = "your-project-id"
+  region  = "us-central1"
+}
+
+resource "google_sql_database_instance" "default" {
+  name             = "example-sql-instance"
+  region           = "us-central1"
+  database_version = "MYSQL_5_7"
+
+  settings {
+    tier = "db-f1-micro"
+    backup_configuration {
+      enabled    = true
+      start_time = "03:00"
+    }
+  }
+}
+
+resource "google_sql_database" "default_db" {
+  name     = "example_database"
+  instance = google_sql_database_instance.default.name
+}

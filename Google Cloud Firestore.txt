@@ -1,0 +1,10 @@
+provider "google" {
+  project = "your-project-id"
+}
+
+resource "google_firestore_database" "default" {
+  name     = "(default)"
+  project  = "your-project-id"
+  location = "us-central"
+  type     = "FIRESTORE_NATIVE"
+}

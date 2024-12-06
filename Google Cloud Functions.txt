@@ -1,0 +1,28 @@
+provider "google" {
+  project = "your-project-id"
+  region  = "us-central1"
+}
+
+resource "google_cloudfunctions_function" "default" {
+  name        = "example-function"
+  description = "My example Cloud Function"
+
+  runtime     = "nodejs16"
+  entry_point = "helloWorld"
+
+  source_archive_bucket = google_storage_bucket.default.name
+  source_archive_object = google_storage_bucket_object.default.name
+
+  trigger_http = true
+}
+
+resource "google_storage_bucket" "default" {
+  name     = "example-function-bucket"
+  location = "US"
+}
+
+resource "google_storage_bucket_object" "default" {
+  name   = "function-source.zip"
+  bucket = google_storage_bucket.default.name
+  source = "path/to/your/source.zip"
+}

@@ -1,0 +1,7 @@
+provider "google" {
+  project = "your-project-id"
+}
+
+resource "google_pubsub_topic" "default" {
+  name = "example-topic"
+}
